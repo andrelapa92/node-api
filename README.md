@@ -1,5 +1,5 @@
 # REST API em NodeJS
-Este projeto foi desenvolvido com o intuito de servir como base para uma aplicação em NodeJS.
+Este projeto foi desenvolvido com o intuito de servir como base para uma aplicação em NodeJS.<br>
 Foram utilizadas bibliotecas amplamente conhecidas como Express e Sequelize.
 
 ## Primeiros Passos
@@ -8,19 +8,19 @@ Para rodar o projeto, basta clonar o repositório e executar o comando `npm inst
 ## Rotas
 
 ### Listar Usuários
-Retorna uma lista de usuários.
-Método: GET
+Retorna uma lista de usuários.<br>
+Método: GET<br>
 Endpont: localhost:3000/api/v1/users
 
 ### Buscar Usuário Pelo ID
-Retorna um usuário pelo ID.
-Método: GET
+Retorna um usuário pelo ID.<br>
+Método: GET<br>
 Endpont: localhost:3000/api/v1/users/:id
 
 ### Criar Usuário
-Cria um usuário.
-Método: POST
-Endpont: localhost:3000/api/v1/users
+Cria um usuário.<br>
+Método: POST<br>
+Endpont: localhost:3000/api/v1/users<br>
 Body:
 ```json
 {
@@ -32,9 +32,9 @@ Body:
 
 
 ### Atualizar Usuário
-Atualiza um usuário.
-Método: PUT
-Endpont: localhost:3000/api/v1/users/:id
+Atualiza um usuário.<br>
+Método: PUT<br>
+Endpont: localhost:3000/api/v1/users/:id<br>
 Body:
 ```json
 {
@@ -43,6 +43,6 @@ Body:
 ```
 
 ### Deletar Usuário
-Deleta um usuário.
-Método: DELETE
+Deleta um usuário.<br>
+Método: DELETE<br>
 Endpont: localhost:3000/api/v1/users/:id
