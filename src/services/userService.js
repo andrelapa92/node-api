@@ -1,5 +1,6 @@
 import userRepository from "../repositories/userRepository.js";
 import { AlreadyExists, NotFound } from "../utils/error/customErrors.js";
+import bcrypt from "bcrypt";
 
 async function getUsers() {
     return await userRepository.getUsers();
@@ -13,18 +14,29 @@ async function getUserById(id) {
     return existingUser;
 }
 
-async function createUser(user) {
-    const existingUser = await userRepository.getUserByEmail(user.email);
+async function getUserByEmail(email) {
+    const existingUser = await userRepository.getUserByEmail(email);
+    if (existingUser) {
+        return existingUser;
+    } else {
+        return false;
+    }
+}
+
+async function createUser(reqBody) {
+    const existingUser = await getUserByEmail(reqBody.email);
     if (existingUser) {
         throw new AlreadyExists('E-mail já cadastrado.');
     }
-    return await userRepository.createUser(user);
+    reqBody.password = await bcrypt.hash(reqBody.password, 10);
+    return await userRepository.createUser(reqBody);
 }
 
 
-async function updateUser(id, body) {
+async function updateUser(id, reqBody) {
     const existingUser = await getUserById(id);
-    return await userRepository.updateUser(existingUser, body);
+    reqBody.password = await bcrypt.hash(reqBody.password, 10);
+    return await userRepository.updateUser(existingUser, reqBody);
 }
 
 async function deleteUser(id) {
@@ -39,6 +51,7 @@ async function deleteUser(id) {
 export default {
     getUsers,
     getUserById,
+    getUserByEmail,
     createUser,
     updateUser,
     deleteUser

@@ -18,20 +18,23 @@ async function getUserById(id) {
 
 async function getUserByEmail(email) {
     try {
-        return await models.User.findOne({ where: { email } });
+        const existingUser = await models.User.findOne({ where: { email } });
+        if (existingUser) {
+            return existingUser;
+        } else {
+            return false;
+        }
     } catch (error) {
+        console.log(error);
         throw new Error('Erro ao buscar usuário pelo e-mail no banco de dados.');
     }
 }
 
-async function createUser(user) {
+async function createUser(reqBody) {
     try {
-        user = {
-            ...user,
-            created_at: new Date(),
-            updated_at: new Date(),
-        };
-        return await models.User.create(user);
+        reqBody.created_at = new Date();
+        reqBody.updated_at = new Date();
+        return await models.User.create(reqBody);
     } catch (error) {
         throw new Error('Erro ao inserir usuário no banco de dados.');
     }
